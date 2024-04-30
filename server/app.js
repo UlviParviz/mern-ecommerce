@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 
 import productRoutes from "./routes/product.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+
+
 import { connectDatabase } from "./config/db.connect.js";
 
 import errorMiddleware from "./middlewares/errors.js";
@@ -20,6 +23,8 @@ dotenv.config({ path: "server/config/config.env" });
 connectDatabase();
 
 app.use("/api/v1", productRoutes);
+app.use("/api/v1", authRoutes);
+
 
 app.use(errorMiddleware);
 
