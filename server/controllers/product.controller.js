@@ -5,7 +5,6 @@ import APIFilters from "../utils/filters.js";
 
 export const getProducts = catchAsyncErrors(async (req, res) => {
   const resPerPage = 4;
-
   const apiFilters = new APIFilters(Product, req.query).search().filters();
 
   let products = await apiFilters.query;
@@ -21,6 +20,7 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
   });
 });
 
+// Create new Product   =>  /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {
   req.body.user = req.user._id;
 
@@ -31,6 +31,7 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
   });
 });
 
+// Get single product details   =>  /api/v1/products/:id
 export const getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req?.params?.id);
 
@@ -43,6 +44,7 @@ export const getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Update product details   =>  /api/v1/products/:id
 export const updateProduct = catchAsyncErrors(async (req, res) => {
   let product = await Product.findById(req?.params?.id);
 
@@ -59,6 +61,7 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
   });
 });
 
+// Delete product   =>  /api/v1/products/:id
 export const deleteProduct = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id);
 
@@ -69,6 +72,6 @@ export const deleteProduct = catchAsyncErrors(async (req, res) => {
   await product.deleteOne();
 
   res.status(200).json({
-    message: "Product deleted successfully",
+    message: "Product Deleted",
   });
 });
