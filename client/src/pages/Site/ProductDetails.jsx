@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import pic from "../../assets/images/default_product.png";
 import { Rating } from "@mui/material";
 import { useGetProductDetailsQuery } from "../../redux/api/productsApi";
@@ -7,12 +7,18 @@ import toast from "react-hot-toast";
 import Loader from "../../layouts/Site/Loader";
 
 const ProductDetails = () => {
-
   const params = useParams()
 
   const {data, isLoading, error, isError} = useGetProductDetailsQuery(params?.id)
 
   const product = data?.product
+
+  const[activeImg, setActiveImg] = useState('')
+
+  useEffect(()=>{
+    setActiveImg(product?.images[0]? product?.images[0]?.url : pic)
+  }, [product])
+
 
   useEffect(()=>{
     if(isError){
@@ -23,19 +29,19 @@ const ProductDetails = () => {
 if(isLoading) return <Loader/>
 
   return (
-    <div className="flex justify-center items-start gap-10 p-8">
-      <div className="flex-col justify-center w-[40%] items-center py-5">
-        <div className="border-2 rounded-lg">
-          <img className=" rounded-lg w-[100%]" src={product?.images[0].url} alt="" />
+    <div className="lg:flex justify-center items-start gap-10 p-8">
+      <div className="flex-col justify-center lg:w-[40%] items-center py-5">
+        <div className="rounded-lg">
+          <img className=" rounded-lg w-[100%]" src={activeImg} alt="" />
         </div>
-        <div className="flex items-center justify-center gap-5 py-8">
-          {product?.images?.map((img) => (
+        <div className="flex items-center justify-center md:justify-around lg:justify-center flex-wrap gap-5 py-8">
+          {product?.images?.map((img,index) => (
 
-          <img className="w-[150px] rounded-lg" src={img?.url} alt="" />
+          <img onClick={() => setActiveImg(img.url)} key={index} className={`w-[150px] p-2 rounded-lg cursor-pointer ${img?.url === activeImg ? "border-2 border-red-500" : ""} `} src={img?.url} alt="" />
           ))}
         </div>
       </div>
-      <div className="w-[40%] p-5">
+      <div className="lg:w-[40%] p-5">
         <div className="flex flex-col gap-4" >
           <h2 className="font-bold text-3xl">{product?.name}</h2>
           <span className="font-extrabold text-gray-600 text-sm">Product # <span>{product?._id}</span>  </span>
