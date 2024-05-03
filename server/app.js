@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import cors from 'cors'
 import productRoutes from "./routes/product.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import orderRoutes from './routes/order.routes.js'
@@ -20,6 +20,7 @@ process.on('uncaughtException', (err) => {
 const app = express();
 app.use(express.json());
 app.use(cookieParser())
+app.use(cors())
 
 dotenv.config({ path: "server/config/config.env" });
 

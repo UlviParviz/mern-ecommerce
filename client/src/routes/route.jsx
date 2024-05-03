@@ -4,6 +4,7 @@ import Products from "../pages/Admin/Products";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
 import Home from "../pages/Site/Home";
+import ProductDetails from "../pages/Site/ProductDetails";
 import SiteRoot from "../pages/Site/SiteRoot";
 
 export const ROUTES = [
@@ -22,6 +23,10 @@ export const ROUTES = [
       {
         path: "cart",
         element: <Cart/>
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetails/>
       }
     ],
   },

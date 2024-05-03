@@ -1,8 +1,15 @@
 import React from 'react'
+import Products from '../../components/Site/Products'
+import MetaData from '../../layouts/Site/MetaData'
 
 const Home = () => {
   return (
-    <div className='text-3xl font-extrabold'>Home</div>
+    <>
+    <MetaData title = {'Home'}/>
+    <div className='flex items-center p-5'>
+      <Products/>
+    </div>
+    </>
   )
 }
 
