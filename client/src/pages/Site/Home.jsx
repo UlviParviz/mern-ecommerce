@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
     <MetaData title = {'Home'}/>
-    <div className='flex items-center p-5'>
+    <div className='flex items-center p-5 justify-center'>
       <Products/>
     </div>
     </>
