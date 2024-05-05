@@ -60,20 +60,20 @@ const Filters = () => {
   };
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-3xl font-bold">Filters</h2>
+      <h2 className="text-3xl font-bold text-center lg:text-left">Filters</h2>
       <hr />
       <div className="flex flex-col gap-3">
         <h3 className="text-2xl font-bold">Price</h3>
-        <form className="flex gap-3 items-center" onSubmit={handleButtonClick}>
+        <form className="flex gap-3 items-center justify-center" onSubmit={handleButtonClick}>
           <input
-            className="w-[80px]  rounded-lg"
+            className="w-[85px]  rounded-lg"
             type="text"
             placeholder="Min ($)"
             value={min}
             onChange={(e) => setMin(e.target.value)}
           />
           <input
-            className="w-[80px] rounded-lg"
+            className="w-[85px] rounded-lg"
             type="text"
             placeholder="Max ($)"
             value={max}
@@ -85,6 +85,7 @@ const Filters = () => {
         <hr />
         <div className="flex flex-col gap-3">
           <h3 className="text-2xl font-bold">Category</h3>
+          <div className="flex flex-wrap gap-3 justify-center lg:block">
           {PRODUCT_CATEGORIES?.map((category, index) => (
             <div key={index} className="flex gap-3 items-center">
               <input
@@ -97,9 +98,12 @@ const Filters = () => {
               <label htmlFor="">{category}</label>
             </div>
           ))}
+          </div>
         </div>
         <div className="flex flex-col gap-3">
           <h3 className="text-2xl font-bold">Ratings</h3>
+          <div className="flex flex-wrap gap-3 justify-center lg:block">
+
           {[5, 4, 3, 2, 1].map((rating, index) => {
             return( <div key={index} className="flex gap-3 items-center">
               <input
@@ -122,6 +126,7 @@ const Filters = () => {
               </label>
             </div>)
           })}
+          </div>
         </div>
       </div>
     </div>

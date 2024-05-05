@@ -47,28 +47,30 @@ const Products = () => {
           ? `${data?.products?.length} Products found with keyword : ${keyword}`
           : `Products`}
       </h2>
-      <div className={keyword ? "flex gap-5  " : "flex flex-col "}>
+      <div className={keyword ? "lg:flex gap-5 lg:justify-around " : "flex flex-col gap-3 "}>
         {keyword && (
-          <div className="w-[30%] border-2 rounded-lg p-2">
+          <div className="lg:w-[30%] w-full rounded-lg p-2">
             <Filters/>
           </div>
         )}
         <div
           className={
-            keyword ? "flex flex-col gap-7 w-[80%]" : "flex flex-col gap-7 items-center"
+            keyword ? "flex flex-col lg:items-start gap-7 w-full lg:w-[80%]" : "flex flex-col gap-7 items-center"
           }
         >
-          <div className={keyword ?"flex gap-4 flex-wrap md:gap-9 lg:gap-4 ": "flex gap-4 flex-wrap justify-center  md:gap-9 lg:gap-4 "}>
+          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-between justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-around md:gap-9 lg:gap-4 "}>
             {data?.products?.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </div>
+      </div>
+      {keyword ? "" :
         <CustomPagination
           resPerPage={data?.resPerPage}
           filteredProductsCount={data?.filteredProductsCount}
-        />
-      </div>
+          />
+      }
     </div>
   );
 };
