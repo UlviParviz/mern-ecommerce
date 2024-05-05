@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../../assets/images/logo.jpg';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '../../assets/images/default_avatar.jpg'
+import Search from './Search';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,9 +13,7 @@ const Header = () => {
         <img className='w-[100%] ' src={Logo} alt="" />
       </div>
       <div className='w-[200px] md:w-[350px] lg:w-[550px]'>
-        <form className='flex justify-between items-center border-2 rounded-lg '>
-          <input placeholder='Search' type="text" className='py-1 font-bold border-none rounded-md outline-amber-50 focus:outline-0 w-[100%]' />
-        </form>
+        <Search/>
       </div>
       <div className='flex items-center justify-between gap-2 md:gap-4'>
         <div onClick={() => { navigate("/cart")}} className='cursor-pointer flex gap-1 items-center justify-center text-xl border-2 p-1 rounded-lg'>
