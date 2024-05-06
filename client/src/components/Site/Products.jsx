@@ -58,7 +58,7 @@ const Products = () => {
             keyword ? "flex flex-col lg:items-start gap-7 w-full lg:w-[80%]" : "flex flex-col gap-7 items-center"
           }
         >
-          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-between justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-around md:gap-9 lg:gap-4 "}>
+          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-start justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-around md:gap-9 lg:gap-4 "}>
             {data?.products?.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

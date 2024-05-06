@@ -18,13 +18,13 @@ const Search = () => {
     };
 
     return (
-        <form onSubmit={submitHandler} className='flex justify-between items-center border-2 rounded-lg '>
+        <form onSubmit={submitHandler} className='flex justify-between items-center border-2 rounded-lg  '>
             <input
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 placeholder='Search'
                 type="text"
-                className='py-1 font-bold border-none rounded-md outline-amber-50 focus:outline-0 w-[100%]'
+                className='py-2 font-bold border-none rounded-md outline-amber-50 focus:outline-0 w-[100%]'
             />
         </form>
     );
