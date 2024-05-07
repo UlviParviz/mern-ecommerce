@@ -5,33 +5,37 @@ import Avatar from '../../assets/images/default_avatar.jpg';
 import Search from './Search';
 import { useGetMeQuery } from '../../redux/api/userApi';
 import { useSelector } from 'react-redux';
-import { useLazyLogoutQuery} from '../../redux/api/authApi';
+import { useLazyLogoutQuery } from '../../redux/api/authApi';
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoading } = useGetMeQuery();
 
-  const [logout, {data}] = useLazyLogoutQuery();
+  const [logout] = useLazyLogoutQuery();
 
   const { user } = useSelector((state) => state.auth);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const logoutHandler = () => {
-    logout()
-    navigate(0)
-  }
+    logout();
+    navigate(0);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false); // Dropdown'u kapat
+  };
 
   return (
     <header className='flex justify-between items-center px-1 md:px-5 py-2 border-b-2 gap-4'>
-      <div onClick={() => navigate('/')} className='w-[100px] flex items-center justify-center cursor-pointer'>
+      <div onClick={() => navigate('/')} className='w-[80px] md:w-[100px] flex items-center justify-center cursor-pointer'>
         <img className='w-[100%] ' src={Logo} alt="" />
       </div>
       <div className='w-[200px] md:w-[350px] lg:w-[550px]'>
         <Search />
       </div>
       <div className='flex items-center justify-between gap-2 md:gap-4'>
-        <div onClick={() => navigate("/cart")} className='cursor-pointer flex gap-1 items-center justify-center text-xl border border-red-500 p-1 rounded-lg'>
+        <div onClick={() => navigate("/cart")} className='cursor-pointer flex gap-1 items-center justify-center text-md md:text-xl border border-red-500 p-1 rounded-lg'>
           <span>Cart</span>
           <span className='px-2 bg-red-500 text-white outline-none rounded-lg'>0</span>
         </div>
@@ -45,7 +49,7 @@ const Header = () => {
                 type="button"
               >
                 <span className="sr-only">Open user menu</span>
-                <img className="w-10 h-9 rounded-full" src={user?.avatar ? user?.avatar?.url : Avatar } alt="user photo"/>
+                <img className="w-10 h-9 rounded-full" src={user?.avatar ? user?.avatar?.url : Avatar } alt={user?.name}/>
               </button>
               {isDropdownOpen && (
                 <div
@@ -58,17 +62,17 @@ const Header = () => {
                   </div>
                   <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
                     <li>
-                      <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
+                      <Link onClick={closeDropdown} to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                     </li>
                     <li>
-                      <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</Link>
+                      <Link onClick={closeDropdown} to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Orders</Link>
                     </li>
                     <li>
-                      <Link href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</Link>
+                      <Link onClick={closeDropdown} to={"/me/profile"} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</Link>
                     </li>
                   </ul>
                   <div className="py-2">
-                    <Link onClick={logoutHandler} href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</Link>
+                    <Link onClick={() => { logoutHandler(); closeDropdown(); }} to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</Link>
                   </div>
                 </div>
               )}

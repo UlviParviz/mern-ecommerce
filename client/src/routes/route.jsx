@@ -1,3 +1,4 @@
+import ProtectedRoute from "../components/Site/ProtectedRoute";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
 import Products from "../pages/Admin/Products";
@@ -6,8 +7,10 @@ import Cart from "../pages/Site/Cart";
 import Home from "../pages/Site/Home";
 import Login from "../pages/Site/Login";
 import ProductDetails from "../pages/Site/ProductDetails";
+import Profile from "../pages/Site/Profile";
 import Register from "../pages/Site/Register";
 import SiteRoot from "../pages/Site/SiteRoot";
+import UpdateProfile from "../pages/Site/UpdateProfile";
 
 export const ROUTES = [
   {
@@ -37,7 +40,15 @@ export const ROUTES = [
       {
         path: "register",
         element: <Register/>
-      }
+      },
+      {
+        path: "me/profile",
+        element: <ProtectedRoute> <Profile/> </ProtectedRoute> 
+      },
+      {
+        path: "me/update_profile",
+        element: <ProtectedRoute> <UpdateProfile/></ProtectedRoute> 
+      },
     ],
   },
   {
