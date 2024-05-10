@@ -41,7 +41,7 @@ const Products = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col gap-6 ">
+    <div className="flex flex-col gap-6  ">
       <h2 className={"text-3xl font-bold text-center"}>
         {keyword
           ? `${data?.products?.length} Products found with keyword : ${keyword}`
@@ -58,19 +58,21 @@ const Products = () => {
             keyword ? "flex flex-col lg:items-start gap-7 w-full lg:w-[80%]" : "flex flex-col gap-7 items-center"
           }
         >
-          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-start justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-around md:gap-9 lg:gap-4 "}>
+          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-start justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-center md:gap-8 lg:gap-4 "}>
             {data?.products?.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </div>
       </div>
+      <div className="w-full flex justify-center items-center">
       {keyword ? "" :
         <CustomPagination
           resPerPage={data?.resPerPage}
           filteredProductsCount={data?.filteredProductsCount}
           />
       }
+      </div>
     </div>
   );
 };

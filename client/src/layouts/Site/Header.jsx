@@ -28,10 +28,10 @@ const Header = () => {
 
   return (
     <header className='flex justify-between items-center px-1 md:px-5 py-2 border-b-2 gap-4'>
-      <div onClick={() => navigate('/')} className='w-[80px] md:w-[100px] flex items-center justify-center cursor-pointer'>
+      <div onClick={() => navigate('/')} className='w-[70px] md:w-[100px] flex items-center justify-center cursor-pointer'>
         <img className='w-[100%] ' src={Logo} alt="" />
       </div>
-      <div className='w-[200px] md:w-[350px] lg:w-[550px]'>
+      <div className='w-[150px] md:w-[350px] lg:w-[550px]'>
         <Search />
       </div>
       <div className='flex items-center justify-between gap-2 md:gap-4'>

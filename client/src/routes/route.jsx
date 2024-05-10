@@ -10,7 +10,9 @@ import ProductDetails from "../pages/Site/ProductDetails";
 import Profile from "../pages/Site/Profile";
 import Register from "../pages/Site/Register";
 import SiteRoot from "../pages/Site/SiteRoot";
+import UpdatePassword from "../pages/Site/UpdatePassword";
 import UpdateProfile from "../pages/Site/UpdateProfile";
+import UploadAvatar from "../pages/Site/UploadAvatar";
 
 export const ROUTES = [
   {
@@ -48,6 +50,14 @@ export const ROUTES = [
       {
         path: "me/update_profile",
         element: <ProtectedRoute> <UpdateProfile/></ProtectedRoute> 
+      },
+      {
+        path: "me/upload_avatar",
+        element: <ProtectedRoute><UploadAvatar/></ProtectedRoute> 
+      },
+      {
+        path: "me/update_password",
+        element: <ProtectedRoute><UpdatePassword/></ProtectedRoute> 
       },
     ],
   },
