@@ -53,7 +53,7 @@ const Login = () => {
                     <label htmlFor="">Password</label>
                     <input name='password' value={password} onChange={(e) => setPassword(e.target.value)} className='rounded-lg' type="password" />
                 </div>
-            <div className='flex justify-end'><span className='hover:text-red-500 cursor-pointer'>Forgot Password?</span></div>
+            <div className='flex justify-end'><span onClick={() => navigate('/password/forgot')} className='hover:text-red-500 cursor-pointer'>Forgot Password?</span></div>
             <button disabled={isLoading}  className="rounded-lg relative flex h-[50px] w-full items-center justify-center overflow-hidden bg-gray-800 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-lg before:bg-red-500 before:duration-500 before:ease-out hover:shadow-red-600 hover:before:h-56 hover:before:w-full">
       <span className="relative z-10">{isLoading ? "..." : "Sign In"}</span>
     </button>

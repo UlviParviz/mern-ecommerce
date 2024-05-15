@@ -4,11 +4,13 @@ import Dashboard from "../pages/Admin/Dashboard";
 import Products from "../pages/Admin/Products";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
+import ForgotPassword from "../pages/Site/ForgotPassword";
 import Home from "../pages/Site/Home";
 import Login from "../pages/Site/Login";
 import ProductDetails from "../pages/Site/ProductDetails";
 import Profile from "../pages/Site/Profile";
 import Register from "../pages/Site/Register";
+import ResetPassword from "../pages/Site/ResetPassword";
 import SiteRoot from "../pages/Site/SiteRoot";
 import UpdatePassword from "../pages/Site/UpdatePassword";
 import UpdateProfile from "../pages/Site/UpdateProfile";
@@ -42,6 +44,14 @@ export const ROUTES = [
       {
         path: "register",
         element: <Register/>
+      },
+      {
+        path: "password/forgot",
+        element: <ForgotPassword/>
+      },
+      {
+        path: "password/reset/:token",
+        element: <ResetPassword/>
       },
       {
         path: "me/profile",
