@@ -14,6 +14,7 @@ const Header = () => {
   const [logout] = useLazyLogoutQuery();
 
   const { user } = useSelector((state) => state.auth);
+  const {cartItems} = useSelector((state => state.cart))
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -37,7 +38,7 @@ const Header = () => {
       <div className='flex items-center justify-between gap-2 md:gap-4'>
         <div onClick={() => navigate("/cart")} className='cursor-pointer flex gap-1 items-center justify-center text-md md:text-xl border border-red-500 p-1 rounded-lg'>
           <span>Cart</span>
-          <span className='px-2 bg-red-500 text-white outline-none rounded-lg'>0</span>
+          <span className='px-2 bg-red-500 text-white outline-none rounded-lg'>{cartItems?.length}</span>
         </div>
         <div className='relative'>
           {user ? (

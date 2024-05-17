@@ -3,6 +3,7 @@ import { useResetPasswordMutation } from '../../redux/api/userApi'
 import toast from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import MetaData from '../../layouts/Site/MetaData'
 
 const ResetPassword = () => {
 
@@ -46,6 +47,7 @@ const ResetPassword = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen px-3 lg:items-start lg:pt-[80px]">
+      <MetaData title={"Reset Password"}/>
       <div className="w-full max-w-md">
         <form
           className="shadow-lg rounded-lg bg-white p-6"

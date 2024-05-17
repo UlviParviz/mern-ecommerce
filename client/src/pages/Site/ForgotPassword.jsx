@@ -3,6 +3,7 @@ import { useForgotPasswordMutation } from "../../redux/api/userApi";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../layouts/Site/MetaData";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -38,6 +39,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex justify-center lg:pt-[80px] min-h-screen lg:items-start items-center">
+      <MetaData title={"Forgot Password"}/>
       <div className="w-full max-w-md px-3 rounded-md">
         <form
           className="shadow-md rounded bg-white p-6"

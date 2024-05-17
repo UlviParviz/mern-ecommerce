@@ -4,6 +4,7 @@ import { useLoginMutation } from '../../redux/api/authApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import MetaData from '../../layouts/Site/MetaData'
 
 const Login = () => {
 
@@ -42,6 +43,7 @@ const Login = () => {
 
   return (
     <div className='flex items-center justify-center py-[35%] md:py-[25%] lg:py-[10%]'>
+        <MetaData title={"Sign In"}/>
         <div className='w-[93%] md:w-[72%] lg:w-[43%] flex flex-col justify-center gap-8 border-2 border-red-500 py-12 px-3 md:px-6 rounded-lg'>
             <h2 className='text-3xl font-bold text-center'>Login your account</h2>
             <form className='flex flex-col gap-3 ' onSubmit={submitHandler}>
