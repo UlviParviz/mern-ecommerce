@@ -11,6 +11,7 @@ import ProductDetails from "../pages/Site/ProductDetails";
 import Profile from "../pages/Site/Profile";
 import Register from "../pages/Site/Register";
 import ResetPassword from "../pages/Site/ResetPassword";
+import Shipping from "../pages/Site/Shipping";
 import SiteRoot from "../pages/Site/SiteRoot";
 import UpdatePassword from "../pages/Site/UpdatePassword";
 import UpdateProfile from "../pages/Site/UpdateProfile";
@@ -19,7 +20,7 @@ import UploadAvatar from "../pages/Site/UploadAvatar";
 export const ROUTES = [
   {
     path: "/",
-    element:<SiteRoot/> ,
+    element: <SiteRoot />,
     children: [
       {
         path: "",
@@ -27,53 +28,80 @@ export const ROUTES = [
       },
       {
         path: "about",
-        element: <About/>
+        element: <About />,
       },
       {
         path: "cart",
-        element: <Cart/>
+        element: <Cart />,
+      },
+      {
+        path: "shipping",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <Shipping />{" "}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "product/:id",
-        element: <ProductDetails/>
+        element: <ProductDetails />,
       },
       {
         path: "login",
-        element: <Login/>
+        element: <Login />,
       },
       {
         path: "register",
-        element: <Register/>
+        element: <Register />,
       },
       {
         path: "password/forgot",
-        element: <ForgotPassword/>
+        element: <ForgotPassword />,
       },
       {
         path: "password/reset/:token",
-        element: <ResetPassword/>
+        element: <ResetPassword />,
       },
       {
         path: "me/profile",
-        element: <ProtectedRoute> <Profile/> </ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <Profile />{" "}
+          </ProtectedRoute>
+        ),
       },
       {
         path: "me/update_profile",
-        element: <ProtectedRoute> <UpdateProfile/></ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <UpdateProfile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "me/upload_avatar",
-        element: <ProtectedRoute><UploadAvatar/></ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            <UploadAvatar />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "me/update_password",
-        element: <ProtectedRoute><UpdatePassword/></ProtectedRoute> 
+        element: (
+          <ProtectedRoute>
+            <UpdatePassword />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
     path: "/admin",
-    element:<AdminRoot />,
+    element: <AdminRoot />,
     children: [
       {
         path: "",
@@ -81,8 +109,8 @@ export const ROUTES = [
       },
       {
         path: "products",
-        element: <Products/>
-      }
+        element: <Products />,
+      },
     ],
   },
 ];

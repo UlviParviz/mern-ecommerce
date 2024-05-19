@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Logo from '../../assets/images/logo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import Avatar from '../../assets/images/default_avatar.jpg';
 import Search from './Search';
 import { useGetMeQuery } from '../../redux/api/userApi';
 import { useSelector } from 'react-redux';
 import { useLazyLogoutQuery } from '../../redux/api/authApi';
+import Logo from '../../assets/images/auditore-high-resolution-logo.png';
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,9 +15,10 @@ const Header = () => {
   const [logout] = useLazyLogoutQuery();
 
   const { user } = useSelector((state) => state.auth);
-  const {cartItems} = useSelector((state => state.cart))
+  const { cartItems } = useSelector((state) => state.cart);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
 
   const logoutHandler = () => {
     logout();
@@ -24,19 +26,46 @@ const Header = () => {
   };
 
   const closeDropdown = () => {
-    setIsDropdownOpen(false); // Dropdown'u kapat
+    setIsDropdownOpen(false);
+  };
+
+  const toggleSearchDropdown = () => {
+    setIsSearchDropdownOpen(!isSearchDropdownOpen);
+  };
+
+  const closeSearchDropdown = () => {
+    setIsSearchDropdownOpen(false);
   };
 
   return (
     <header className='flex justify-between items-center px-1 md:px-5 py-2 border-b-2 gap-4'>
-      <div onClick={() => navigate('/')} className='w-[70px] md:w-[100px] flex items-center justify-center cursor-pointer'>
-        <img className='w-[100%] ' src={Logo} alt="" />
+      <div onClick={() => navigate('/')} className='w-[130px] md:w-[150px] flex items-center justify-center cursor-pointer'>
+        <img className='w-[100%] h-full ' src={Logo} alt="" />
       </div>
-      <div className='w-[150px] md:w-[350px] lg:w-[550px]'>
-        <Search />
+
+      {/* Search Component */}
+      <div className='w-[60px] md:w-[350px] lg:w-[660px]'>
+        <div className='md:hidden flex justify-center items-center'>
+          <button
+            onClick={toggleSearchDropdown}
+            className="px-2 py-1 border rounded-md bg-black text-white"
+          >
+            <FaSearch/>
+          </button>
+          {isSearchDropdownOpen && (
+            <div className="absolute top-8 left-0 w-full p-4 bg-white border rounded-md shadow-md z-30">
+              <Search onSearchComplete={closeSearchDropdown} />
+            </div>
+          )}
+        </div>
+        <div className='hidden md:block'>
+          <Search onSearchComplete={closeSearchDropdown} />
+        </div>
       </div>
-      <div className='flex items-center justify-between gap-2 md:gap-4'>
-        <div onClick={() => navigate("/cart")} className='cursor-pointer flex gap-1 items-center justify-center text-md md:text-xl border border-red-500 p-1 rounded-lg'>
+
+      {/* User and Cart Section */}
+      <div className='flex items-center justify-between gap-4 md:gap-4'>
+        <div onClick={() => navigate("/cart")} className='cursor-pointer flex gap-1 items-center justify-center text-md md:text-xl rounded-lg'>
           <span>Cart</span>
           <span className='px-2 bg-red-500 text-white outline-none rounded-lg'>{cartItems?.length}</span>
         </div>
@@ -81,8 +110,8 @@ const Header = () => {
           ) : (
             !isLoading && (
               <div onClick={() => navigate("/login")} className='rounded-lg  text-white flex items-center justify-center cursor-pointer'>
-                <button className="rounded-sm group relative min-h-[35px] w-[80px] overflow-hidden border border-red-500 bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:top-0 before:h-0 before:w-1/4 before:bg-red-500 before:duration-500 after:absolute after:bottom-0 after:right-0 after:h-0 after:w-1/4 after:bg-red-500 after:duration-500 hover:text-white hover:before:h-full hover:after:h-full">
-                  <span className="top-0 flex h-full w-full items-center justify-center before:absolute before:bottom-0 before:left-1/4 before:z-0 before:h-0 before:w-1/4 before:bg-red-500 before:duration-500 after:absolute after:right-1/4 after:top-0 after:z-0 after:h-0 after:w-1/4 after:bg-red-500 after:duration-500 hover:text-white group-hover:before:h-full group-hover:after:h-full"></span>
+                <button className="rounded-sm group relative min-h-[35px] w-[80px] overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:top-0 before:h-0 before:w-1/4 before:bg-black before:duration-500 after:absolute after:bottom-0 after:right-0 after:h-0 after:w-1/4 after:bg-black after:duration-500 hover:text-white hover:before:h-full hover:after:h-full">
+                  <span className="top-0 flex h-full w-full items-center justify-center before:absolute before:bottom-0 before:left-1/4 before:z-0 before:h-0 before:w-1/4 before:bg-black before:duration-500 after:absolute after:right-1/4 after:top-0 after:z-0 after:h-0 after:w-1/4 after:bg-black after:duration-500 hover:text-white group-hover:before:h-full group-hover:after:h-full"></span>
                   <span className="absolute bottom-0 left-0 right-0 top-0 z-10 flex h-full w-full items-center justify-center group-hover:text-white">Sign In</span>
                 </button>
               </div>

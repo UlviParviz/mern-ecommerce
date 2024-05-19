@@ -6,7 +6,7 @@ const ProductCard = ({product}) => {
 
   const navigate = useNavigate()
   return (
-    <div className='w-full  md:w-[300px] lg:w-[340px] shadow-md rounded-lg p-5 flex flex-col gap-2 justify-between  mx-auto md:m-0'>
+    <div className='w-full   md:w-[250px] lg:w-[300px] shadow-md rounded-lg p-5 flex flex-col gap-2 justify-between  mx-auto md:m-0'>
       <div className='lg:h-[430px] md:h-[500px] h-[550px] flex items-center'>
         <img className='w-[100%]   ' src={product?.images[0]?.url} alt="" />
       </div>

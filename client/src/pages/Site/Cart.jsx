@@ -1,7 +1,7 @@
 import React from "react";
 import MetaData from "../../layouts/Site/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import Empty from "../../assets/images/empty.png";
 import { removeCartItem, setCartItem } from "../../redux/features/cartSlice";
@@ -9,6 +9,8 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const decreaseQuantity = (item, quantity) => {
     const newQty = quantity - 1;
@@ -41,6 +43,13 @@ const Cart = () => {
   const removeCartItemHandler = (id) => {
     dispatch(removeCartItem(id))
   }
+
+
+  const checkoutHandler = () => {
+    navigate('/shipping')
+  }
+
+
 
   return (
     <div className="w-[90%] mx-auto">
@@ -134,7 +143,7 @@ const Cart = () => {
                   Est. total: <span class="order-summary-values">${cartItems?.reduce((acc, item) =>acc + item?.quantity * item?.price, 0).toFixed(2)}</span>
                 </p>
                 <hr class="my-4" />
-                <button class="relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
+                <button onClick={checkoutHandler} class="relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
                   <span class="relative z-10">Checkout</span>
                 </button>
               </div>
