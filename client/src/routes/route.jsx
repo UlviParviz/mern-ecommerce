@@ -8,6 +8,7 @@ import ConfirmOrder from "../pages/Site/ConfirmOrder";
 import ForgotPassword from "../pages/Site/ForgotPassword";
 import Home from "../pages/Site/Home";
 import Login from "../pages/Site/Login";
+import PaymentMethod from "../pages/Site/PaymentMethod";
 import ProductDetails from "../pages/Site/ProductDetails";
 import Profile from "../pages/Site/Profile";
 import Register from "../pages/Site/Register";
@@ -50,6 +51,15 @@ export const ROUTES = [
           <ProtectedRoute>
             {" "}
             <ConfirmOrder />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "payment_method",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <PaymentMethod />{" "}
           </ProtectedRoute>
         ),
       },

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingInfo } from '../../redux/features/cartSlice'
 import { useNavigate } from 'react-router-dom'
 import MetaData from '../../layouts/Site/MetaData'
+import CheckoutSteps from '../../layouts/Site/CheckoutSteps'
 const Shipping = () => {
 
     const dispatch = useDispatch() 
@@ -11,7 +12,7 @@ const Shipping = () => {
 
     const countriesList = Object.values(countries)
 
-    const [adress, setAdress] = useState('')
+    const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [zipCode, setZipCode] = useState('')
     const [phoneNo, setPhoneNo] = useState('')
@@ -23,7 +24,7 @@ const Shipping = () => {
     useEffect(() => {
 
         if(shippingInfo){
-            setAdress(shippingInfo?.adress)
+            setAddress(shippingInfo?.address)
             setCity(shippingInfo?.city)
             setCountry(shippingInfo?.country)
             setZipCode(shippingInfo?.zipCode)
@@ -35,7 +36,7 @@ const Shipping = () => {
     const submitHandler = (e) => {
         e.preventDefault()
 
-        dispatch(saveShippingInfo({adress, city, phoneNo, zipCode, country}))
+        dispatch(saveShippingInfo({address, city, phoneNo, zipCode, country}))
 
         navigate('/confirm_order')
     }
@@ -43,8 +44,10 @@ const Shipping = () => {
 
 
   return (
-    <div className="flex justify-center min-h-screen items-center">
+    <>
       <MetaData title={"Shipping Info"}/>
+      <CheckoutSteps shipping/>
+    <div className="flex justify-center min-h-screen items-center">
   <div className="w-full max-w-lg">
     <form
       className="shadow-lg rounded-lg bg-white p-8"
@@ -58,8 +61,8 @@ const Shipping = () => {
           id="address_field"
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           name="address"
-          value={adress}
-          onChange={(e) => setAdress(e.target.value)}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           required
         />
       </div>
@@ -127,6 +130,7 @@ const Shipping = () => {
     </form>
   </div>
 </div>
+    </>
 
   )
 }

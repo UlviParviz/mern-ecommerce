@@ -19,7 +19,7 @@ const Profile = () => {
   
     <div className="w-full md:w-5/12 mt-4 md:mt-0">
       <h4 className="text-xl font-bold">Full Name</h4>
-      <p className="text-gray-800 mt-1">{user?.name}</p>
+      <p className="text-gray-800 mt-1 capitalize">{user?.name}</p>
   
       <h4 className="text-xl font-bold mt-4">Email Address</h4>
       <p className="text-gray-800 mt-1">{user?.email}</p>

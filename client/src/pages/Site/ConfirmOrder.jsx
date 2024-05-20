@@ -3,6 +3,7 @@ import MetaData from '../../layouts/Site/MetaData'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { calculateOrderCost } from '../../helpers/helpers'
+import CheckoutSteps from '../../layouts/Site/CheckoutSteps'
 
 const ConfirmOrder = () => {
 
@@ -19,14 +20,16 @@ const ConfirmOrder = () => {
 
 
   return (
-    <div class="flex flex-wrap justify-between min-h-screen px-8 py-4">
+    <>    
         <MetaData title={"Confirm Order"}/>
+        <CheckoutSteps shipping confirmOrder/>
+    <div class="flex flex-wrap justify-between min-h-screen px-8 py-4">
   <div class="w-full lg:w-2/3 mt-5 order-confirm">
     <h4 class="mb-3">Shipping Info</h4>
-    <p><b>Name:</b> {user?.name}</p>
+    <p className="capitalize"><b>Name:</b> {user?.name}</p>
     <p><b>Phone:</b> {shippingInfo?.phoneNo}</p>
-    <p class="mb-4">
-      <b>Address:</b> {shippingInfo?.adress}, {shippingInfo?.city}, {shippingInfo?.zipCode}, {shippingInfo?.country}
+    <p class="mb-4 capitalize">
+      <b>Address:</b> {shippingInfo?.address}, {shippingInfo?.city}, {shippingInfo?.zipCode}, {shippingInfo?.country}
     </p>
 
     <hr class="my-4" />
@@ -79,6 +82,7 @@ const ConfirmOrder = () => {
     </div>
   </div>
 </div>
+    </>
 
   )
 }
