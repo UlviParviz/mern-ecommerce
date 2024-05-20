@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {  countries } from 'countries-list'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingInfo } from '../../redux/features/cartSlice'
+import { useNavigate } from 'react-router-dom'
+import MetaData from '../../layouts/Site/MetaData'
 const Shipping = () => {
 
     const dispatch = useDispatch() 
+    const navigate = useNavigate()
 
     const countriesList = Object.values(countries)
 
@@ -33,12 +36,15 @@ const Shipping = () => {
         e.preventDefault()
 
         dispatch(saveShippingInfo({adress, city, phoneNo, zipCode, country}))
+
+        navigate('/confirm_order')
     }
 
 
 
   return (
     <div className="flex justify-center min-h-screen items-center">
+      <MetaData title={"Shipping Info"}/>
   <div className="w-full max-w-lg">
     <form
       className="shadow-lg rounded-lg bg-white p-8"

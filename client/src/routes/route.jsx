@@ -4,6 +4,7 @@ import Dashboard from "../pages/Admin/Dashboard";
 import Products from "../pages/Admin/Products";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
+import ConfirmOrder from "../pages/Site/ConfirmOrder";
 import ForgotPassword from "../pages/Site/ForgotPassword";
 import Home from "../pages/Site/Home";
 import Login from "../pages/Site/Login";
@@ -40,6 +41,15 @@ export const ROUTES = [
           <ProtectedRoute>
             {" "}
             <Shipping />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "confirm_order",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <ConfirmOrder />{" "}
           </ProtectedRoute>
         ),
       },

@@ -78,7 +78,7 @@ const Cart = () => {
                   <div class="cart-item" data-key="product1">
                     <div class="flex flex-wrap">
                       <div class="w-full lg:w-1/4 flex justify-center mb-2">
-                        <img src={item?.image} alt="" class="lg:w-[60%] md:w-[42%] w-[50%] " />
+                        <img src={item?.image} alt={item?.name} className=" h-[85px] w-[85px]" />
                       </div>
                       <div class="w-full lg:w-1/4 text-center">
                         <Link

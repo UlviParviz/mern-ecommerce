@@ -28,13 +28,13 @@ const Search = ({ onSearchComplete }) => {
                 type="text"
                 className='font-bold border-none rounded-sm outline-amber-50 focus:outline-0 w-full h-full'
             />
-                <button class="before:ease relative px-2 h-full overflow-hidden shadow-2xl before:absolute before:left-0 before:-ml-2 before:h-48 before:w-48 before:origin-top-right before:-translate-x-full before:translate-y-12 before:-rotate-90 before:bg-gray-900 before:transition-all before:duration-300 hover:text-white hover:shadow-black hover:before:-rotate-180">
+                <button className=" relative px-2 h-full overflow-hidden shadow-2xl bg-transparent text-black ">
       <span class="relative z-10 "><FaSearch/></span>
     </button>
             <button
                 type="button"
                 onClick={onSearchComplete}
-                className='p-2 text-xl  hover:bg-black hover:text-white flex justify-center items-center  bg-white text-black h-full md:hidden '
+                className='p-2 text-xl   flex justify-center items-center  bg-transparent text-black h-full md:hidden '
             >
                 <MdClose/>
             </button>
