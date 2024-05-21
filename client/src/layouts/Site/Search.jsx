@@ -29,7 +29,7 @@ const Search = ({ onSearchComplete }) => {
                 className='font-bold border-none rounded-sm outline-amber-50 focus:outline-0 w-full h-full'
             />
                 <button className=" relative px-2 h-full overflow-hidden shadow-2xl bg-transparent text-black ">
-      <span class="relative z-10 "><FaSearch/></span>
+      <span className="relative z-10 "><FaSearch/></span>
     </button>
             <button
                 type="button"

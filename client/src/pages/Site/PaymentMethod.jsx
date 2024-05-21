@@ -3,8 +3,8 @@ import MetaData from "../../layouts/Site/MetaData";
 import CheckoutSteps from "../../layouts/Site/CheckoutSteps";
 import { useSelector } from "react-redux";
 import { calculateOrderCost } from "../../helpers/helpers";
-import { useCreateNewOrderMutation } from "../../redux/api/orderApi";
-import {toast} from 'react-hot-toast'
+import { useCreateNewOrderMutation, useStripeCheckoutSessionMutation } from "../../redux/api/orderApi";
+import { toast } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
 
 const PaymentMethod = () => {
@@ -13,23 +13,32 @@ const PaymentMethod = () => {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
-  const [createNewOrder, {isLoading, error, isSuccess} ] = useCreateNewOrderMutation()
+  const [createNewOrder, { error, isSuccess }] = useCreateNewOrderMutation()
 
   const { itemsPrice, shippingPrice, taxPrice, totalPrice } =
     calculateOrderCost(cartItems);
 
+  const [stripeCheckoutSession, { data: checkoutData, error: checkoutError, isLoading }] = useStripeCheckoutSessionMutation()
 
-    console.log(shippingInfo);
 
-   useEffect(() => {
-    if(error){
+  useEffect(() => {
+    if (checkoutData) {
+      window.location.href = checkoutData?.url
+    }
+    if (checkoutError) {
+      toast.error(checkoutError?.data?.message)
+    }
+  }, [checkoutData, checkoutError])
+
+  useEffect(() => {
+    if (error) {
       toast.error(error?.data?.message)
     }
 
-    if(isSuccess){
+    if (isSuccess) {
       navigate('/')
     }
-   }, [error, isSuccess]) 
+  }, [error, isSuccess])
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,25 +49,34 @@ const PaymentMethod = () => {
         orderItems: cartItems,
         itemsPrice,
         shippingAmount: shippingPrice,
-        taxAmount:taxPrice,
-        totalAmount:totalPrice,
-        paymentInfo : {
-            status: 'Not Paid'
+        taxAmount: taxPrice,
+        totalAmount: totalPrice,
+        paymentInfo: {
+          status: 'Not Paid'
         },
         paymentMethod: "COD"
       };
       createNewOrder(orderData)
     }
     if (method === "Card") {
-      alert(method);
+      const orderData = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemsPrice,
+        shippingAmount: shippingPrice,
+        taxAmount: taxPrice,
+        totalAmount: totalPrice,
+
+      };
+      stripeCheckoutSession(orderData)
     }
   };
 
   return (
     <>
       <MetaData title={"Payment Method"} />
-      <CheckoutSteps shipping confirmOrder payment />
 
+      <CheckoutSteps shipping confirmOrder payment />
       <div className="flex justify-center min-h-screen">
         <div className="w-full max-w-md mt-10">
           <form
@@ -76,7 +94,7 @@ const PaymentMethod = () => {
                 value="COD"
                 onChange={(e) => setMethod("COD")}
               />
-              <label className="form-check-label" for="codradio">
+              <label className="form-check-label" htmlFor="codradio">
                 Cash on Delivery
               </label>
             </div>
@@ -89,12 +107,12 @@ const PaymentMethod = () => {
                 value="Card"
                 onChange={(e) => setMethod("Card")}
               />
-              <label className="form-check-label" for="cardradio">
+              <label className="form-check-label" htmlFor="cardradio">
                 Card - VISA, MasterCard
               </label>
             </div>
-            <button className="mt-5 relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
-              <span class="relative z-10">Continue</span>
+            <button disabled= {isLoading} className=" disabled:bg-gray-300 mt-5 relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
+              <span className="relative z-10">Continue</span>
             </button>
           </form>
         </div>
