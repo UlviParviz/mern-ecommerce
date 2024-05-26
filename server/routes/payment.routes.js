@@ -5,7 +5,7 @@ import { stripeCheckoutSession, stripeWebhook } from "../controllers/payment.con
 const router = express.Router();
 
 router.route("/payment/checkout_session").post(isAuthendicatedUser, stripeCheckoutSession)
-router.route("/payment/webhook").post(stripeWebhook)
+router.route("/payment/webhook", express.raw({ type: "application/json" })).post(stripeWebhook)
 
 
 export default router;

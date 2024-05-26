@@ -1,12 +1,10 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import Order from "../models/order.model.js";
+
 import Stripe from "stripe";
+const stripe = Stripe('sk_test_51PJAlQ02SPpvtPcn59RVXlyamAjGVeECMpVtKm2Njvh2cXCcKYj5ZAvOHNDn3ST3ekaxYc1Cw8TUig1VGgdJDj3t00IhKvUT6T');
 
-import Order from '../models/order.model.js'
-
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-
-//Create stripe checkout session - /api/v1/payment/checkout_session
-
+// Create stripe checkout session   =>  /api/v1/payment/checkout_session
 export const stripeCheckoutSession = catchAsyncErrors(
   async (req, res, next) => {
     const body = req?.body;
@@ -36,7 +34,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      success_url: `${process.env.FRONTEND_URL}/me/orders`,
+      success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`,
       cancel_url: `${process.env.FRONTEND_URL}`,
       customer_email: req?.user?.email,
       client_reference_id: req?.user?._id?.toString(),
@@ -84,10 +82,12 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
   try {
     const signature = req.headers["stripe-signature"];
 
+    const STRIPE_WEBHOOK_SECRET= 'whsec_0a0731e7d4c6698027f64f92db2f279b6abe44bb3761bf1bfad0eccb67108b35'
+
     const event = stripe.webhooks.constructEvent(
       req.rawBody,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET
+      STRIPE_WEBHOOK_SECRET
     );
 
     if (event.type === "checkout.session.completed") {

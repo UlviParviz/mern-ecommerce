@@ -5,6 +5,7 @@ import productRoutes from "./routes/product.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
+import bodyParser  from "body-parser";
 
 import cookieParser from "cookie-parser";
 
@@ -26,6 +27,8 @@ app.use(express.json({ limit: "10mb" ,
 }));
 app.use(cookieParser());
 app.use(cors());
+app.use(bodyParser.raw({type: "*/*"}))
+app.use(bodyParser.json())
 
 dotenv.config({ path: "server/config/config.env" });
 

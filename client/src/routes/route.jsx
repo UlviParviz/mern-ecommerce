@@ -8,6 +8,8 @@ import ConfirmOrder from "../pages/Site/ConfirmOrder";
 import ForgotPassword from "../pages/Site/ForgotPassword";
 import Home from "../pages/Site/Home";
 import Login from "../pages/Site/Login";
+import OrderDetails from "../pages/Site/OrderDetails";
+import Orders from "../pages/Site/Orders";
 import PaymentMethod from "../pages/Site/PaymentMethod";
 import ProductDetails from "../pages/Site/ProductDetails";
 import Profile from "../pages/Site/Profile";
@@ -89,6 +91,24 @@ export const ROUTES = [
           <ProtectedRoute>
             {" "}
             <Profile />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "me/orders",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <Orders />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "me/order/:id",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <OrderDetails />{" "}
           </ProtectedRoute>
         ),
       },
