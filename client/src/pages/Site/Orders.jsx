@@ -12,23 +12,21 @@ import { clearCart } from '../../redux/features/cartSlice';
 const Orders = () => {
   const { data, isLoading, error } = useMyOrdersQuery();
 
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const orderSuccess = searchParams.get("order_success")
+  const orderSuccess = searchParams.get("order_success");
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    if(orderSuccess){
-
-      dispatch(clearCart())
-      navigate("/me/orders")
-
+    if (orderSuccess) {
+      dispatch(clearCart());
+      navigate("/me/orders");
     }
   }, [error, orderSuccess]);
 
@@ -36,20 +34,11 @@ const Orders = () => {
     const orders = {
       columns: [
         {
-          label: "ID",
-          field: "id",
-          sort: "asc",
-        },
-        {
           label: "Amount",
           field: "amount",
           sort: "asc",
         },
-        {
-          label: "Payment Status",
-          field: "status",
-          sort: "asc",
-        },
+
         {
           label: "Order Status",
           field: "orderStatus",
@@ -66,19 +55,20 @@ const Orders = () => {
 
     data?.orders?.forEach((order) => {
       orders.rows.push({
-        id: order?._id,
         amount: `$${order?.totalAmount}`,
-        status: order?.paymentInfo?.status?.toUpperCase(),
         orderStatus: order?.orderStatus,
         actions: (
-          <div className='flex md:gap-3 gap-2 md:flex-row flex-col items-center justify-center '>
+          <div className='flex justify-center'>
+            <div className='flex justify-center'>
             <Link to={`/me/order/${order?._id}`} className="btn btn-primary w-full flex justify-center">
               <FaEye />
             </Link>
+            </div>
+            <div className='flex justify-center'>
             <Link to={`/invoice/order/${order?._id}`} className="btn btn-success ms-2 w-full flex justify-center">
               <FaPrint />
             </Link>
-          
+            </div>
           </div>
         ),
       });
@@ -87,19 +77,21 @@ const Orders = () => {
     return orders;
   };
 
+
   if (isLoading) return <Loader />;
 
   return (
-    <div className=' min-h-screen'>
+    <div className='min-h-screen'>
       <MetaData title={'My Orders'} />
       <h1 className='my-5 text-center'>{data?.orders?.length} Orders</h1>
-      <div className='table-responsive lg:w-[90%] mx-auto '>
+      <div className='table-responsive lg:w-[90%] mx-auto'>
         <MDBDataTable
           data={setOrders()}
           className='px-3'
           bordered
-          striped
           hover
+          displayEntries={false}
+          searching={false}
         />
       </div>
     </div>

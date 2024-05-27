@@ -1,3 +1,4 @@
+import Invoice from "../components/Site/Invoice";
 import ProtectedRoute from "../components/Site/ProtectedRoute";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
@@ -109,6 +110,15 @@ export const ROUTES = [
           <ProtectedRoute>
             {" "}
             <OrderDetails />{" "}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "invoice/order/:id",
+        element: (
+          <ProtectedRoute>
+            {" "}
+            <Invoice />{" "}
           </ProtectedRoute>
         ),
       },

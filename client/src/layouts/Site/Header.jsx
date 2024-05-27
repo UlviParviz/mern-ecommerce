@@ -95,7 +95,7 @@ const Header = () => {
                       <Link onClick={closeDropdown} to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                     </li>
                     <li>
-                      <Link onClick={closeDropdown} to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Orders</Link>
+                      <Link to={"/me/orders"} onClick={closeDropdown}  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Orders</Link>
                     </li>
                     <li>
                       <Link onClick={closeDropdown} to={"/me/profile"} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</Link>

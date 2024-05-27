@@ -4,6 +4,8 @@ import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "../../layouts/Site/Loader";
+import { FaEye, FaPrint } from "react-icons/fa";
+
 
 const OrderDetails = () => {
   const params = useParams();
@@ -32,13 +34,11 @@ const OrderDetails = () => {
   return (
     <div>
       <MetaData title={"Order Details"} />
-      <div className="row d-flex justify-content-center">
+      <div className="row d-flex justify-content-center px-2">
         <div className="col-12 col-lg-9 mt-5 order-details">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="mt-5 mb-4">Your Order Details</h3>
-            <a className="btn btn-success" href="/invoice/order/order-id">
-              <i className="fa fa-print"></i> Invoice
-            </a>
+
           </div>
           <table className="table table-striped table-bordered">
             <tbody>
@@ -101,6 +101,9 @@ const OrderDetails = () => {
               </tr>
             </tbody>
           </table>
+          <Link className="btn btn-success" to={`/invoice/order/${order?._id}`}>
+              <FaPrint className="inline mr-1"/> Invoice
+            </Link>
 
           <h3 className="mt-5 my-4">Order Items:</h3>
 
@@ -108,7 +111,7 @@ const OrderDetails = () => {
           <div className="cart-item my-1">
             {orderItems?.map((item) => (
 
-            <div className="row my-5">
+            <div key={item?.product} className="row my-5">
               <div className="col-4 col-lg-2">
                 <img
                   src={item?.image}
@@ -135,6 +138,7 @@ const OrderDetails = () => {
           <hr />
         </div>
       </div>
+
     </div>
   );
 };
