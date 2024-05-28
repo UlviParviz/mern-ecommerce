@@ -51,7 +51,7 @@ const Invoice = () => {
     <div className='lg:px-5 px-3 min-h-screen py-6'>
         <MetaData title={"Invoice"}/>
     <div className="order-invoice mt-5 border-0">
-    <div className="row d-flex justify-content-center mb-5">
+    <div className="row d-flex justify-content-center mb-5 px-5">
       <button className="btn btn-success col-md-5 flex justify-center gap-2 items-center" onClick={handleDownload}>
         <FaPrint/> <span>Download Invoice</span>
       </button>

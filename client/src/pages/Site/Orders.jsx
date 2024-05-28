@@ -59,12 +59,12 @@ const Orders = () => {
         orderStatus: order?.orderStatus,
         actions: (
           <div className='flex justify-center'>
-            <div className='flex justify-center'>
+            <div className='flex justify-center w-full'>
             <Link to={`/me/order/${order?._id}`} className="btn btn-primary w-full flex justify-center">
               <FaEye />
             </Link>
             </div>
-            <div className='flex justify-center'>
+            <div className='flex justify-center w-full'>
             <Link to={`/invoice/order/${order?._id}`} className="btn btn-success ms-2 w-full flex justify-center">
               <FaPrint />
             </Link>
