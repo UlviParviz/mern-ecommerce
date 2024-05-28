@@ -47,7 +47,17 @@ export const getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Update product details   =>  /api/v1/products/:id
+// Get products Admin   =>  /api/v1/admin/products
+export const getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find()
+
+
+  res.status(200).json({
+    products,
+  });
+});
+
+// Update product    =>  /api/v1/products/:id
 export const updateProduct = catchAsyncErrors(async (req, res) => {
   let product = await Product.findById(req?.params?.id);
 

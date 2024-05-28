@@ -2,7 +2,7 @@ import Invoice from "../components/Site/Invoice";
 import ProtectedRoute from "../components/Site/ProtectedRoute";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
-import Products from "../pages/Admin/Products";
+import ListProducts from "../pages/Admin/ListProducts";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
 import ConfirmOrder from "../pages/Site/ConfirmOrder";
@@ -159,7 +159,7 @@ export const ROUTES = [
       },
       {
         path: "products",
-        element: <ProtectedRoute><Products /></ProtectedRoute>,
+        element: <ProtectedRoute><ListProducts/></ProtectedRoute>,
       },
     ],
   },
