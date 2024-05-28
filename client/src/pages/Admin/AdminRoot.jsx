@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react'
-import AdminHeader from '../../layouts/Admin/Header'
 import { Outlet } from 'react-router-dom'
-import AdminFooter from '../../layouts/Admin/Footer'
 import { Toaster } from 'react-hot-toast'
+import Header from '../../layouts/Site/Header'
+import Footer from '../../layouts/Site/Footer'
 
 const AdminRoot = () => {
   return (
     <Fragment>
             <Toaster position='top-center'/>
-        <AdminHeader/>
+        <Header/>
         <Outlet/>
-        <AdminFooter/>
+        <Footer/>
     </Fragment>
   )
 }

@@ -38,13 +38,13 @@ const Header = () => {
   };
 
   return (
-    <header className='flex justify-between items-center px-1 md:px-5 py-2 border-b-2 gap-4'>
+    <header className='flex justify-between items-center px-1 md:px-5 py-2 border-b-2'>
       <div onClick={() => navigate('/')} className='w-[130px] md:w-[150px] flex items-center justify-center cursor-pointer'>
         <img className='w-[100%] h-full ' src={Logo} alt="" />
       </div>
 
       {/* Search Component */}
-      <div className='w-[60px] md:w-[350px] lg:w-[660px]'>
+      <div className='w-[60px] md:w-[300px] lg:w-[660px]'>
         <div className='md:hidden flex justify-center items-center'>
           <button
             onClick={toggleSearchDropdown}
@@ -91,9 +91,11 @@ const Header = () => {
                     <div className="font-medium truncate">{user?.email}</div>
                   </div>
                   <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+                    {user?.role === 'admin' && (
                     <li>
-                      <Link onClick={closeDropdown} to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
+                      <Link onClick={closeDropdown} to={'/admin/dashboard'} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                     </li>
+                    )}
                     <li>
                       <Link to={"/me/orders"} onClick={closeDropdown}  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Orders</Link>
                     </li>

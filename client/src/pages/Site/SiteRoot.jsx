@@ -8,8 +8,8 @@ import ScrollToTop from '../../components/Site/ScrollToTop'
 const SiteRoot = () => {
   return (
     <Fragment>
-      <Toaster position='top-center'/>
       <ScrollToTop/>
+      <Toaster position='top-center'/>
         <Header/>
         <Outlet/>
         <Footer/>

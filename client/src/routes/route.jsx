@@ -154,12 +154,12 @@ export const ROUTES = [
     element: <AdminRoot />,
     children: [
       {
-        path: "",
-        element: <Dashboard />,
+        path: "dashboard",
+        element: <ProtectedRoute admin = {true}><Dashboard /></ProtectedRoute> ,
       },
       {
         path: "products",
-        element: <Products />,
+        element: <ProtectedRoute><Products /></ProtectedRoute>,
       },
     ],
   },

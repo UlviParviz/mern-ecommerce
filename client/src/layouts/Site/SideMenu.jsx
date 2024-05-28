@@ -2,29 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaUser, FaUserCircle, FaLock } from "react-icons/fa";
 
-const SideMenu = () => {
-  const menuItems = [
-    {
-      name: "Profile",
-      url: "/me/profile",
-      icon: <FaUser />,
-    },
-    {
-      name: "Update Profile",
-      url: "/me/update_profile",
-      icon: <FaUser />,
-    },
-    {
-      name: "Upload Avatar",
-      url: "/me/upload_avatar",
-      icon: <FaUserCircle />,
-    },
-    {
-      name: "Update Password",
-      url: "/me/update_password",
-      icon: <FaLock />,
-    },
-  ];
+const SideMenu = ({menuItems}) => {
+ 
   const location = useLocation();
 
   const [activeMenuItem, setActiveMenuItem] = useState(location.pathname);

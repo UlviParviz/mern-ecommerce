@@ -28,15 +28,15 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   };
 
   return (
-    <div className="flex justify-center items-center my-4 w-full">
+    <div className="flex justify-center items-center flex-wrap my-4">
       {filteredProductsCount > resPerPage && (
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={resPerPage}
           totalItemsCount={filteredProductsCount}
           onChange={setCurrentPageNo}
-          nextPageText={"Next"}
-          prevPageText={"Prev"}
+          nextPageText={">"}
+          prevPageText={"<"}
           itemClass="relative inline-block border-2 text-red-500 font-extrabold rounded-full px-3 py-2 mr-2"
           linkClass="relative flex items-center justify-center inline-block text-gray-700 hover:text-red-800"
           activeLinkClass="inline-block text-center text-red px-2 py-1 mr-2 "

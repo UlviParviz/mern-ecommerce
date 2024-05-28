@@ -15,20 +15,14 @@ const Products = () => {
   const min = searchParams.get("min");
   const max = searchParams.get("max");
   const category = searchParams.get("category");
-  const ratings = searchParams.get("ratings")
-
-
-
+  const ratings = searchParams.get("ratings");
 
   const params = { page, keyword };
 
-  min !== null && (params.min = min)
-  max !== null && (params.max = max)
-  category !== null && (params.category = category)
-  ratings !== null && (params.ratings = ratings)
-
-
-
+  if (min !== null) params.min = min;
+  if (max !== null) params.max = max;
+  if (category !== null) params.category = category;
+  if (ratings !== null) params.ratings = ratings;
 
   const { data, isLoading, error, isError } = useGetProductsQuery(params);
 
@@ -41,38 +35,34 @@ const Products = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col gap-6  ">
-      <h2 className={"text-3xl font-bold text-center"}>
+    <div className="flex flex-col gap-6">
+      <h2 className="text-3xl font-bold text-center">
         {keyword
-          ? `${data?.products?.length} Products found with keyword : ${keyword}`
+          ? `${data?.products?.length} Products found with keyword: ${keyword}`
           : `Products`}
       </h2>
-      <div className={keyword ? "lg:flex gap-5 lg:justify-around " : "flex flex-col gap-3 "}>
+      <div className={keyword ? "lg:flex lg:gap-5 lg:justify-around" : "flex flex-col gap-3"}>
         {keyword && (
           <div className="lg:w-[30%] w-full rounded-lg p-2">
-            <Filters/>
+            <Filters />
           </div>
         )}
-        <div
-          className={
-            keyword ? "flex flex-col lg:items-start gap-7 w-full lg:w-[80%]" : "flex flex-col gap-7 items-center"
-          }
-        >
-          <div className={keyword ?"flex px-5 flex-wrap m-8 lg:m-0  lg:gap-5  lg:justify-start justify-center gap-10 lg:px-0 ": "flex  flex-wrap justify-center md:gap-8 lg:gap-4 "}>
+        <div className={keyword ? "flex flex-col lg:items-start gap-7 w-full lg:w-[70%]" : "flex flex-col gap-7 items-center"}>
+          <div className={keyword ? "flex flex-wrap px-1 m-8 lg:m-0 lg:gap-5 lg:justify-start justify-center gap-10 lg:px-0" : "flex flex-wrap justify-center gap-5 md:gap-8 lg:gap-4"}>
             {data?.products?.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center items-center">
-      {keyword ? "" :
-        <CustomPagination
-          resPerPage={data?.resPerPage}
-          filteredProductsCount={data?.filteredProductsCount}
+      {!keyword && (
+        <div className="mx-auto flex flex-wrap">
+          <CustomPagination
+            resPerPage={data?.resPerPage}
+            filteredProductsCount={data?.filteredProductsCount}
           />
-      }
-      </div>
+        </div>
+      )}
     </div>
   );
 };

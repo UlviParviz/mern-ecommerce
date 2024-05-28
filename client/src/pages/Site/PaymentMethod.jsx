@@ -37,6 +37,7 @@ const PaymentMethod = () => {
 
     if (isSuccess) {
       navigate('/me/orders?order_success=true')
+      window.location.reload()
     }
   }, [error, isSuccess])
 
