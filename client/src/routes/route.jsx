@@ -3,6 +3,7 @@ import ProtectedRoute from "../components/Site/ProtectedRoute";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
 import ListProducts from "../pages/Admin/ListProducts";
+import NewProduct from "../pages/Admin/NewProduct";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
 import ConfirmOrder from "../pages/Site/ConfirmOrder";
@@ -159,7 +160,11 @@ export const ROUTES = [
       },
       {
         path: "products",
-        element: <ProtectedRoute><ListProducts/></ProtectedRoute>,
+        element: <ProtectedRoute admin= {true}><ListProducts/></ProtectedRoute>,
+      },
+      {
+        path: "product/new",
+        element: <ProtectedRoute admin= {true}><NewProduct/></ProtectedRoute>,
       },
     ],
   },

@@ -35,7 +35,7 @@ const Products = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 ">
       <h2 className="text-3xl font-bold text-center">
         {keyword
           ? `${data?.products?.length} Products found with keyword: ${keyword}`
@@ -56,7 +56,7 @@ const Products = () => {
         </div>
       </div>
       {!keyword && (
-        <div className="mx-auto flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
           <CustomPagination
             resPerPage={data?.resPerPage}
             filteredProductsCount={data?.filteredProductsCount}

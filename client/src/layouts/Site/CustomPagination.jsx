@@ -28,7 +28,7 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-wrap my-4">
+    <div className="flex flex-wrap my-4">
       {filteredProductsCount > resPerPage && (
         <Pagination
           activePage={currentPage}

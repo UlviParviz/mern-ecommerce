@@ -37,6 +37,15 @@ export const productApi = createApi({
     getAdminProducts: builder.query({
       query: () => `/admin/products`,
     }),
+    createProduct: builder.mutation({
+      query(body) {
+        return {
+          url: "/admin/products",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -45,5 +54,6 @@ export const {
   useGetProductDetailsQuery,
   useSubmitReviewMutation,
   useCanUserReviewQuery,
-  useGetAdminProductsQuery
+  useGetAdminProductsQuery,
+  useCreateProductMutation
 } = productApi;

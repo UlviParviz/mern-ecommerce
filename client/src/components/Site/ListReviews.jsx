@@ -4,14 +4,13 @@ import { Rating } from "@mui/material";
 
 
 const ListReviews = ({reviews}) => {
-    console.log(reviews);
     
   return (
     <div className="reviews w-[80%] mx-auto py-3">
       <h3 className='text-center text-3xl font-bold mb-3'>All Reviews:</h3>
       {reviews?.map((review) => (
-          <div className='border-b border-b-black'>
-            <div key={review._id} className="review-card py-3 mb-4 ">
+          <div key={review._id} className='border-b border-b-black'>
+            <div  className="review-card py-3 mb-4 ">
               <div className="row">
                 <div className="col-1">
                   <img

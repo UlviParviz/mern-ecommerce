@@ -80,7 +80,7 @@ const ProductDetails = () => {
           <div className="rounded-lg">
             <img className=" rounded-lg w-[100%]" src={activeImg} alt="" />
           </div>
-          <div className="flex items-center justify-center md:justify-around lg:justify-center flex-wrap gap-5 py-8">
+          <div className="flex items-center justify-center lg:justify-center flex-wrap gap-5 py-8">
             {product?.images?.map((img, index) => (
               <img
                 onClick={() => setActiveImg(img.url)}
@@ -114,7 +114,7 @@ const ProductDetails = () => {
             <div className="text-3xl font-bold text-center">
               ${product?.price}
             </div>
-            <div className="flex justify-center gap-5 items-center">
+            <div className="flex justify-center gap-4 items-center">
               <div className="flex rounded-lg">
                 <div
                   onClick={decreaseQuantity}
@@ -132,7 +132,7 @@ const ProductDetails = () => {
                   +
                 </div>
               </div>
-              <button disabled={product?.stock <= 0} onClick={setItemToCart} className="disabled:bg-gray-300   py-2 px-5 flex justify-center items-center cursor-pointer rounded-lg bg-red-500 text-white">
+              <button disabled={product?.stock <= 0} onClick={setItemToCart} className="disabled:bg-gray-300 text-sm py-3 px-1 flex justify-center items-center cursor-pointer rounded-lg bg-red-500 text-white">
                 Add to cart
               </button>
             </div>
