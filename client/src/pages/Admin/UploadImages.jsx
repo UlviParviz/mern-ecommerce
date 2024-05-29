@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaTimes, FaTrash } from "react-icons/fa";
 import AdminLayout from "../../layouts/Admin/AdminLayout";
-import { useGetProductDetailsQuery, useUploadProductImagesMutation } from "../../redux/api/productsApi";
+import { useDeleteProductImageMutation, useGetProductDetailsQuery, useUploadProductImagesMutation } from "../../redux/api/productsApi";
 import { useNavigate, useParams } from "react-router-dom";
 import MetaData from '../../layouts/Site/MetaData'
 import toast from "react-hot-toast";
@@ -24,6 +24,9 @@ const UploadImages = () => {
     }
     if (error) {
         toast.error(error?.data?.message);
+      }
+      if(deleteError){
+        toast.error(deleteError?.data?.message)
       }
       if(isSuccess){
         setImagesPreview([])
@@ -67,13 +70,19 @@ const UploadImages = () => {
 
   }
 
+  const [deleteProductImage, {isLoading: isDeleteLoading, error: deleteError}] = useDeleteProductImageMutation()
+
+  const deleteImage = (imgId) => {
+    deleteProductImage({id: params?.id, body: {imgId}})
+  }
+
   return (
     <AdminLayout>
         <MetaData title={'Upload Product Images'}/>
       <div className="row wrapper">
         <div className="col-12 col-lg-10 mt-5 mt-lg-0">
           <form
-            className="shadow rounded bg-body p-3"
+            className="rounded bg-body p-3"
             encType="multipart/form-data"
             onSubmit={submitHandler}
           >
@@ -148,8 +157,9 @@ const UploadImages = () => {
                               borderColor: "#dc3545",
                             }}
                             className="btn btn-block btn-danger cross-button mt-1 py-0 "
-                            disabled={true}
-                            type="button"
+                            type="button" 
+                            disabled={isLoading || isDeleteLoading}
+                            onClick={() => deleteImage(img?.public_id)}
                           >
                             <div className="flex justify-center items-center py-1">
                               <FaTrash />
@@ -162,7 +172,7 @@ const UploadImages = () => {
                 </div>
               )}
             </div>
-            <button disabled={isLoading}  className="mt-4 rounded-lg relative flex h-[50px] w-full items-center justify-center overflow-hidden bg-gray-800 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-lg before:bg-red-500 before:duration-500 before:ease-out hover:shadow-red-600 hover:before:h-56 hover:before:w-full">
+            <button disabled={isLoading || isDeleteLoading}  className="mt-4 rounded-lg relative flex h-[50px] w-full items-center justify-center overflow-hidden bg-gray-800 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-lg before:bg-red-500 before:duration-500 before:ease-out hover:shadow-red-600 hover:before:h-56 hover:before:w-full">
               <span className="relative z-10">{isLoading ? '...' :  'Upload'}</span>
 
             </button>

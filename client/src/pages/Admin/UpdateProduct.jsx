@@ -63,7 +63,7 @@ const UpdateProduct = () => {
       <MetaData title={"Update Product"} />
       <div className="row p-3 w-full">
         <div className="col-10 col-lg-10 mt-5 mt-lg-0 w-full">
-          <form className="shadow rounded bg-body w-full p-2" onSubmit={submitHandler}>
+          <form className="rounded bg-body w-full p-2" onSubmit={submitHandler}>
             <h2 className="mb-4 font-bold text-2xl text-center">Update Product</h2>
             <div className="mb-3">
               <label htmlFor="name_field" className="form-label">

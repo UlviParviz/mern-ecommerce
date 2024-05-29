@@ -3,7 +3,7 @@ import Product from "../models/product.model.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import APIFilters from "../utils/filters.js";
 import Order from "../models/order.model.js";
-import { upload_file } from "../utils/cloudinary.js";
+import { delete_file, upload_file } from "../utils/cloudinary.js";
 
 export const getProducts = catchAsyncErrors(async (req, res) => {
   const resPerPage = 4;
@@ -94,6 +94,28 @@ export const uploadProductImages = catchAsyncErrors(async (req, res) => {
     product,
   });
 });
+// Delete product image    =>  /api/v1/admin/products/:id/delete_image
+export const deleteProductImages = catchAsyncErrors(async (req, res) => {
+  let product = await Product.findById(req?.params?.id);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  const isDeleted = await delete_file(req.body.imgId)
+
+  if(isDeleted){
+    product.images = product?.images?.filter(
+      (img) => img.public_id !== req.body.imgId
+    )
+    await product?.save();
+  }
+
+
+  res.status(200).json({
+    product,
+  });
+});
 
 // Delete product   =>  /api/v1/products/:id
 export const deleteProduct = catchAsyncErrors(async (req, res) => {
@@ -101,6 +123,10 @@ export const deleteProduct = catchAsyncErrors(async (req, res) => {
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
+  }
+
+  for(let i=0 ; i < product?.images?.length ; i++ ){
+    await delete_file(product?.images[i].public_id)
   }
 
   await product.deleteOne();

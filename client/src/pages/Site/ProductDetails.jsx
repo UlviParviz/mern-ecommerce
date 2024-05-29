@@ -96,7 +96,7 @@ const ProductDetails = () => {
         </div>
         <div className="lg:w-[40%] p-5">
           <div className="flex flex-col gap-4">
-            <h2 className="font-bold text-3xl">{product?.name}</h2>
+            <h2 className="font-bold text-3xl capitalize">{product?.name}</h2>
             <span className="font-extrabold text-gray-600 text-sm">
               Product # <span>{product?._id}</span>{" "}
             </span>

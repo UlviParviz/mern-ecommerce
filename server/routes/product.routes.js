@@ -3,6 +3,7 @@ import {
   canUserReview,
   createProductReview,
   deleteProduct,
+  deleteProductImages,
   deleteReview,
   getAdminProducts,
   getProductReviews,
@@ -25,6 +26,9 @@ router
 router
   .route("/admin/products/:id/upload_images")
   .put(isAuthendicatedUser, authorizeRoles("admin"), uploadProductImages);
+  router
+  .route("/admin/products/:id/delete_image")
+  .put(isAuthendicatedUser, authorizeRoles("admin"), deleteProductImages);
 
 router
   .route("/admin/products")

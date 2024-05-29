@@ -5,20 +5,31 @@ import { MDBDataTable } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import { FaImage, FaPencil, FaTrash } from "react-icons/fa6";
 import MetaData from '../../layouts/Site/MetaData';
-import { useGetAdminProductsQuery } from '../../redux/api/productsApi';
+import { useDeleteProductMutation, useGetAdminProductsQuery } from '../../redux/api/productsApi';
 import AdminLayout from '../../layouts/Admin/AdminLayout'
 
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
+  const [deleteProduct, {isLoading: isDeleteLoading, error: deleteError, isSuccess}] = useDeleteProductMutation()
 
  
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+    if(isSuccess){
+      toast.success('Product Deleted')
+    }
 
   
-  }, [error]);
+  }, [error, deleteError, isSuccess]);
+
+  const deleteProductHandler = (id) => {
+    deleteProduct(id)
+  }
 
   const setProducts = () => {
     const products = {
@@ -45,7 +56,7 @@ const ListProducts = () => {
 
     data?.products?.forEach((product) => {
       products?.rows.push({
-        name: `${product?.name?.substring(0,20)}...`,
+        name: `${(product?.name?.substring(0, 20)+'...').toLowerCase().replace(/\b\w/g, char => char.toUpperCase())}`,
         stock: product?.stock,
         actions: (
           <div className='flex justify-center flex-col md:flex-row'>
@@ -60,7 +71,7 @@ const ListProducts = () => {
             </Link>
             </div>
             <div className='flex justify-center w-full'>
-            <button  className="btn btn-outline-danger w-full flex justify-center">
+            <button disabled={isDeleteLoading}  className="btn btn-outline-danger w-full flex justify-center" onClick={() => deleteProductHandler(product?._id)}>
               <FaTrash />
             </button>
             </div>
