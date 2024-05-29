@@ -93,7 +93,7 @@ const OrderDetails = () => {
               </tr>
               <tr>
                 <th scope="row">Stripe ID</th>
-                <td>{paymentInfo.id || 'Null'}</td>
+                <td>{paymentInfo?.id || 'Null'}</td>
               </tr>
               <tr>
                 <th scope="row">Amount Paid</th>
@@ -121,7 +121,7 @@ const OrderDetails = () => {
                 />
               </div>
 
-              <div className="col-5 col-lg-5">
+              <div className="col-5 col-lg-5 hover:text-red-500 transition-all duration-500">
                 <Link to={`/product/${item?.product}`}>{item?.name}</Link>
               </div>
 

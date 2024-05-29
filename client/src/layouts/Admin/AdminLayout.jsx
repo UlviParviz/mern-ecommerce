@@ -47,7 +47,7 @@ const AdminLayout = ({children}) => {
           <div className="w-full lg:w-1/4">
             <SideMenu menuItems={menuItems} />
           </div>
-          <div className="w-full lg:w-3/4 rounded-lg mt-2">
+          <div className="w-full lg:w-3/4 rounded-lg mt-3">
             {children}
           </div>
         </div>

@@ -133,7 +133,7 @@ const Cart = () => {
                   Est. total: <span className="order-summary-values">${cartItems?.reduce((acc, item) =>acc + item?.quantity * item?.price, 0).toFixed(2)}</span>
                 </p>
                 <hr className="my-4" />
-                <button onClick={checkoutHandler} className="relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white text-black shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
+                <button onClick={checkoutHandler} className="relative h-[43px] rounded-md w-full overflow-hidden border border-black bg-white shadow-2xl transition-all before:absolute before:left-0 before:right-0 before:top-0 before:h-0 before:w-full before:bg-black before:duration-500 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0 after:w-full after:bg-black  after:duration-500 hover:text-white hover:shadow-black hover:before:h-2/4 hover:after:h-2/4">
                   <span className="relative z-10">Checkout</span>
                 </button>
               </div>

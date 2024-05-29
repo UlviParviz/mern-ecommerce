@@ -12,7 +12,7 @@ const NewProduct = () => {
     name: "",
     description: "",
     price: "",
-    category: "",
+    category: "Electronics",
     stock: "",
     brand: "",
   });
@@ -22,18 +22,15 @@ const NewProduct = () => {
   const [createProduct, { isLoading, error, isSuccess }] =
     useCreateProductMutation();
 
-    useEffect(() => {
-        if (error) {
-          toast.error(error?.data?.message);
-        }
-        if(isSuccess){
-            toast.success('Product Created')
-            navigate('/admin/products')
-        }
-    
-      
-      }, [error, isSuccess]);
-
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+    if (isSuccess) {
+      toast.success("Product Created");
+      navigate("/admin/products");
+    }
+  }, [error, isSuccess]);
 
   const onChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -41,7 +38,7 @@ const NewProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    createProduct(product)
+    createProduct(product);
   };
 
   return (
@@ -123,11 +120,12 @@ const NewProduct = () => {
                   name="category"
                   value={category}
                   onChange={onChange}
+                  defaultValue={category}
                 >
                   {PRODUCT_CATEGORIES?.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
                   ))}
                 </select>
               </div>
@@ -146,8 +144,13 @@ const NewProduct = () => {
                 />
               </div>
             </div>
-            <button disabled={isLoading} className="mt-2 rounded-lg relative flex h-[50px] w-full items-center justify-center overflow-hidden bg-gray-800 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-lg before:bg-red-500 before:duration-500 before:ease-out hover:shadow-red-600 hover:before:h-56 hover:before:w-full">
-              <span className="relative z-10">{isLoading ? '...' : "Create"}</span>
+            <button
+              disabled={isLoading}
+              className="mt-2 rounded-lg relative flex h-[50px] w-full items-center justify-center overflow-hidden bg-gray-800 text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-lg before:bg-red-500 before:duration-500 before:ease-out hover:shadow-red-600 hover:before:h-56 hover:before:w-full"
+            >
+              <span className="relative z-10">
+                {isLoading ? "..." : "Create"}
+              </span>
             </button>
           </form>
         </div>

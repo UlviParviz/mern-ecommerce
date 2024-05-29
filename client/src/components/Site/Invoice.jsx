@@ -48,7 +48,7 @@ const Invoice = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className='lg:px-5 px-3 min-h-screen py-6'>
+    <div className=' px-3 min-h-screen py-6'>
         <MetaData title={"Invoice"}/>
     <div className="order-invoice mt-5 border-0">
     <div className="row d-flex justify-content-center mb-5 px-5">
@@ -56,7 +56,7 @@ const Invoice = () => {
         <FaPrint/> <span>Download Invoice</span>
       </button>
     </div>
-    <div id="order_invoice" className="pb-3">
+    <div id="order_invoice" className="pb-3 lg:w-[88%] lg:mx-auto">
       <header className="clearfix">
         <div id="logo" className='flex justify-center'>
           <img src={logo} alt="Company Logo" />
@@ -65,10 +65,10 @@ const Invoice = () => {
         <div className='flex flex-col gap-5 md:flex-row md:justify-between'>
 
         <div id="project">
-          <div><span>Name</span> {user?.name}</div>
+          <div className='capitalize'><span>Name</span> {user?.name}</div>
           <div><span>EMAIL</span> {user?.email}</div>
           <div><span>PHONE</span> {shippingInfo?.phoneNo}</div>
-          <div>
+          <div className='capitalize'>
             <span>ADDRESS</span> {shippingInfo?.address}, {shippingInfo?.city}, {shippingInfo?.zipCode}, {shippingInfo?.country}
           </div>
           <div><span>DATE</span> {new Date(order?.createdAt).toLocaleString("en-US")}</div>
@@ -100,7 +100,7 @@ const Invoice = () => {
           <tbody>
             {orderItems?.map((item) => (
             <tr key={item?.product}>
-              <td className="desc">{item?.name}</td>
+              <td className="desc capitalize">{item?.name}</td>
               <td className="unit">${item?.price} ({item?.quantity})</td>
               <td className="total">${item.price * item?.quantity}</td>
             </tr>

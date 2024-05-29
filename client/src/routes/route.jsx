@@ -5,6 +5,7 @@ import Dashboard from "../pages/Admin/Dashboard";
 import ListOrders from "../pages/Admin/ListOrders";
 import ListProducts from "../pages/Admin/ListProducts";
 import NewProduct from "../pages/Admin/NewProduct";
+import ProcessOrder from "../pages/Admin/ProcessOrder";
 import UpdateProduct from "../pages/Admin/UpdateProduct";
 import UploadImages from "../pages/Admin/UploadImages";
 import About from "../pages/Site/About";
@@ -180,6 +181,10 @@ export const ROUTES = [
       {
         path: "orders",
         element: <ProtectedRoute admin= {true}><ListOrders/></ProtectedRoute>,
+      },
+      {
+        path: "orders/:id",
+        element: <ProtectedRoute admin= {true}><ProcessOrder/></ProtectedRoute>,
       },
     ],
   },

@@ -39,7 +39,7 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
           prevPageText={"<"}
           itemClass="relative inline-block border-2 text-red-500 font-extrabold rounded-full px-3 py-2 mr-1"
           linkClass="relative flex items-center justify-center inline-block text-gray-700 hover:text-red-800"
-          activeLinkClass="inline-block text-center text-red px-2 py-1 mr-2 "
+          activeLinkClass="inline-block text-center text-red-600 "
         />
       )}
     </div>
