@@ -5,6 +5,7 @@ import Dashboard from "../pages/Admin/Dashboard";
 import ListProducts from "../pages/Admin/ListProducts";
 import NewProduct from "../pages/Admin/NewProduct";
 import UpdateProduct from "../pages/Admin/UpdateProduct";
+import UploadImages from "../pages/Admin/UploadImages";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
 import ConfirmOrder from "../pages/Site/ConfirmOrder";
@@ -170,6 +171,10 @@ export const ROUTES = [
       {
         path: "products/:id",
         element: <ProtectedRoute admin= {true}><UpdateProduct/></ProtectedRoute>,
+      },
+      {
+        path: "products/:id/upload_images",
+        element: <ProtectedRoute admin= {true}><UploadImages/></ProtectedRoute>,
       },
     ],
   },

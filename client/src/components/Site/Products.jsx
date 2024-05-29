@@ -36,7 +36,7 @@ const Products = () => {
 
   return (
     <div className="flex flex-col gap-6 ">
-      <h2 className="text-3xl font-bold text-center">
+      <h2 className="text-3xl font-bold text-center py-2">
         {keyword
           ? `${data?.products?.length} Products found with keyword: ${keyword}`
           : `Products`}
