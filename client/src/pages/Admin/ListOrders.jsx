@@ -6,26 +6,28 @@ import { Link } from "react-router-dom";
 import { FaImage, FaPencil, FaTrash } from "react-icons/fa6";
 import MetaData from "../../layouts/Site/MetaData";
 import AdminLayout from "../../layouts/Admin/AdminLayout";
-import { useGetAdminOrdersQuery } from "../../redux/api/orderApi";
+import { useDeleteOrderMutation, useGetAdminOrdersQuery } from "../../redux/api/orderApi";
 
 const ListOrders = () => {
   const { data, isLoading, error } = useGetAdminOrdersQuery();
+
+  const [deleteOrder, {error: deleteError, isLoading: isDeleteLoading ,isSuccess}]= useDeleteOrderMutation()
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
-    // if(isSuccess){
-    //   toast.success('Product Deleted')
-    // }
-  }, [error]);
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+    if(isSuccess){
+      toast.success('Order Deleted')
+    }
+  }, [error, deleteError, isSuccess]);
 
-  //   const deleteProductHandler = (id) => {
-  //     deleteProduct(id)
-  //   }
+    const deleteOrderHandler = (id) => {
+      deleteOrder(id)
+    }
 
   const setOrders = () => {
     const orders = {
@@ -71,9 +73,9 @@ const ListOrders = () => {
             </div>
             <div className="flex justify-center w-full">
               <button
-              // disabled={isDeleteLoading}
+              disabled={isDeleteLoading}
               className="btn btn-outline-danger w-full flex justify-center"
-              // onClick={() => deleteProductHandler(product?._id)}
+              onClick={() => deleteOrderHandler(order?._id)}
               >
                 <FaTrash />
               </button>

@@ -10,7 +10,7 @@ const ProductCard = ({product}) => {
       <div className='h-[200px] md:h-[250px] px-1 py-1 flex items-center overflow-hidden'>
         <img className='w-[100%] object-cover overflow-hidden' src={product?.images[0]?.url} alt="" />
       </div>
-        <div onClick={() => navigate(`/product/${product?._id}`)} className='text-xl mt-3 px-2 text-center capitalize flex items-center justify-center hover:text-red-600 font-semibold cursor-pointer'>{product?.name}</div>
+        <div onClick={() => navigate(`/product/${product?._id}`)} className='text-xl mt-3 px-2 text-center capitalize flex items-center justify-center transition-all duration-500 hover:text-red-600 font-semibold cursor-pointer'>{product?.name}</div>
         <div className=' flex gap-2 justify-center items-center text-xl'>
           <div className='flex'>
           <Rating name="half-rating-read" value={product?.ratings} precision={0.1} readOnly />

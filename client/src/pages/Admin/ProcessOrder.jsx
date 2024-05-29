@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../../layouts/Admin/AdminLayout";
 import MetaData from "../../layouts/Site/MetaData";
 import { useOrderDetailsQuery, useUpdateOrderMutation } from "../../redux/api/orderApi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaPrint } from "react-icons/fa";
 
 const ProcessOrder = () => {
     const [status, setStatus] = useState("");
+    const navigate=useNavigate()
   
     const params = useParams();
     const { data } = useOrderDetailsQuery(params?.id);
@@ -45,6 +46,8 @@ const ProcessOrder = () => {
     const updateOrderHandler = (id) => {
       const data = { status };
       updateOrder({ id, body: data });
+      navigate('/admin/orders')
+      window.location.reload()
     };
   
     return (
