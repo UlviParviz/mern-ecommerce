@@ -38,7 +38,7 @@ const ProductDetails = () => {
   };
 
   const increaseQuantity = () => {
-    if(quantity <= product?.stock){
+    if(quantity < product?.stock){
       setQuantity(quantity+1)
     }
   };
