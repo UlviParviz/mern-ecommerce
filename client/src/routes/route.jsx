@@ -2,6 +2,7 @@ import Invoice from "../components/Site/Invoice";
 import ProtectedRoute from "../components/Site/ProtectedRoute";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
+import ListOrders from "../pages/Admin/ListOrders";
 import ListProducts from "../pages/Admin/ListProducts";
 import NewProduct from "../pages/Admin/NewProduct";
 import UpdateProduct from "../pages/Admin/UpdateProduct";
@@ -175,6 +176,10 @@ export const ROUTES = [
       {
         path: "products/:id/upload_images",
         element: <ProtectedRoute admin= {true}><UploadImages/></ProtectedRoute>,
+      },
+      {
+        path: "orders",
+        element: <ProtectedRoute admin= {true}><ListOrders/></ProtectedRoute>,
       },
     ],
   },

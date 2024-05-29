@@ -59,7 +59,7 @@ const ListProducts = () => {
         name: `${(product?.name?.substring(0, 20)+'...').toLowerCase().replace(/\b\w/g, char => char.toUpperCase())}`,
         stock: product?.stock,
         actions: (
-          <div className='flex justify-center flex-col md:flex-row'>
+          <div className='flex justify-center flex-col md:flex-row gap-1'>
             <div className='flex justify-center w-full'>
             <Link to={`/admin/products/${product?._id}`} className="btn btn-outline-primary w-full flex justify-center">
               <FaPencil />
@@ -89,7 +89,7 @@ const ListProducts = () => {
   return (
     <AdminLayout>
       <MetaData title={'All Products'} />
-      <h1 className='my-5 text-center'>{data?.products?.length} Products</h1>
+      <h1 className='my-5 text-center font-bold text-2xl'>{data?.products?.length} Products</h1>
       <div className='table-responsive'>
         <MDBDataTable
           data={setProducts()}
