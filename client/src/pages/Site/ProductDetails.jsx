@@ -10,6 +10,7 @@ import { setCartItem } from "../../redux/features/cartSlice";
 import MetaData from "../../layouts/Site/MetaData";
 import NewReview from "../../components/Site/NewReview";
 import ListReviews from "../../components/Site/ListReviews";
+import NotFound from "../../layouts/Site/NotFound";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -68,6 +69,10 @@ const ProductDetails = () => {
       toast.error(error?.data?.message);
     }
   }, [isError]);
+
+  if(error && error?.status == 404){
+    return <NotFound/>
+  }
 
   if (isLoading) return <Loader />;
 
@@ -132,7 +137,7 @@ const ProductDetails = () => {
                   +
                 </div>
               </div>
-              <button disabled={product?.stock <= 0} onClick={setItemToCart} className="disabled:bg-gray-300 text-sm py-3 px-1 flex justify-center items-center cursor-pointer rounded-lg bg-red-500 text-white">
+              <button disabled={product?.stock <= 0} onClick={setItemToCart} className="disabled:bg-gray-300 text-sm p-2 flex justify-center items-center cursor-pointer rounded-lg bg-red-500 text-white">
                 Add to cart
               </button>
             </div>

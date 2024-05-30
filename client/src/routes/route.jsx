@@ -1,5 +1,6 @@
 import Invoice from "../components/Site/Invoice";
 import ProtectedRoute from "../components/Site/ProtectedRoute";
+import NotFound from "../layouts/Site/NotFound";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
 import ListOrders from "../pages/Admin/ListOrders";
@@ -202,5 +203,9 @@ export const ROUTES = [
         element: <ProtectedRoute admin= {true}><ProcessOrder/></ProtectedRoute>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];

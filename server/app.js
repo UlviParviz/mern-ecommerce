@@ -8,10 +8,15 @@ import paymentRoutes from "./routes/payment.routes.js";
 import bodyParser  from "body-parser";
 
 import cookieParser from "cookie-parser";
-
+import path from 'path'
 import { connectDatabase } from "./config/db.connect.js";
 
 import errorMiddleware from "./middlewares/errors.js";
+import { fileURLToPath } from "url";
+
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 process.on("uncaughtException", (err) => {
   console.log(`Error: ${err}`);
@@ -38,6 +43,14 @@ app.use("/api/v1", productRoutes);
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoutes);
+
+if(process.env.NODE_ENV === "PRODUCTION"){
+  app.use(express.static(path.join(__dirname, "../client/dist")))
+
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname, "../client/dist/index.html"))
+  })
+}
 
 app.use(errorMiddleware);
 

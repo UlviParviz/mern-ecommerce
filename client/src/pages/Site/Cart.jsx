@@ -70,7 +70,7 @@ const Cart = () => {
                   <div className="cart-item" data-key="product1">
                     <div className="flex flex-wrap">
                       <div className="w-full lg:w-1/4 flex justify-center mb-2">
-                        <img src={item?.image} alt={item?.name} className=" h-[85px] w-[85px]" />
+                        <img src={item?.image} alt={item?.name} className=" h-[85px] w-[85px] object-cover" />
                       </div>
                       <div className="w-full lg:w-1/4 text-center">
                         <Link
@@ -100,7 +100,7 @@ const Cart = () => {
                             {" "}
                             -{" "}
                           </span>
-                          <span className="w-[30px] text-center font-semibold">{item?.quantity}</span>
+                          <span className="w-[30px] text-center font-semibold flex items-center justify-center">{item?.quantity}</span>
                           <span
                             onClick={() =>
                               increaseQuantity(item, item.quantity)
