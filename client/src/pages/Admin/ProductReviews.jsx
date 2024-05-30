@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../layouts/Admin/AdminLayout";
 import { MDBDataTable } from "mdbreact";
-import { useLazyGetProductReviewsQuery } from "../../redux/api/productsApi";
+import { useDeleteReviewMutation, useLazyGetProductReviewsQuery } from "../../redux/api/productsApi";
 import toast from "react-hot-toast";
 import { FaEye, FaTrash } from "react-icons/fa";
 import MetaData from "../../layouts/Site/MetaData";
@@ -11,6 +11,8 @@ const ProductReviews = () => {
   const [productId, setProductId] = useState("");
   const [getProductReviews, { data, isLoading, error }] =
     useLazyGetProductReviewsQuery();
+
+   const [deleteReview, {error: deleteError, isLoading: isDeleteLoading, isSuccess}] =  useDeleteReviewMutation()
   const submitHandler = (e) => {
     e.preventDefault();
     getProductReviews(productId);
@@ -20,15 +22,18 @@ const ProductReviews = () => {
     if (error) {
       toast.error(error?.data?.message);
     }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (isSuccess) {
+      toast.success("Review Deleted");
+    }
+  }, [error, deleteError, isSuccess]);
 
-    // if (isSuccess) {
-    //   toast.success("User Deleted");
-    // }
-  }, [error]);
+  const deleteReviewHandler = (id) => {
+    deleteReview({productId, id})
+  }
 
   const setReviews = () => {
     const reviews = {
@@ -70,8 +75,8 @@ const ProductReviews = () => {
           <div className="flex justify-center flex-col md:flex-row gap-1">
             <div className="flex justify-center w-full">
               <button
-                // disabled={isDeleteLoading}
-                // onClick={() => deleteUserHandler(user?._id)}
+                disabled={isDeleteLoading}
+                onClick={() => deleteReviewHandler(review?._id)}
                 className="btn btn-outline-danger w-full flex justify-center"
               >
                 <FaTrash />
