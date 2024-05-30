@@ -4,9 +4,12 @@ import AdminRoot from "../pages/Admin/AdminRoot";
 import Dashboard from "../pages/Admin/Dashboard";
 import ListOrders from "../pages/Admin/ListOrders";
 import ListProducts from "../pages/Admin/ListProducts";
+import ListUsers from "../pages/Admin/ListUsers";
 import NewProduct from "../pages/Admin/NewProduct";
 import ProcessOrder from "../pages/Admin/ProcessOrder";
+import ProductReviews from "../pages/Admin/ProductReviews";
 import UpdateProduct from "../pages/Admin/UpdateProduct";
+import UpdateUser from "../pages/Admin/UpdateUser";
 import UploadImages from "../pages/Admin/UploadImages";
 import About from "../pages/Site/About";
 import Cart from "../pages/Site/Cart";
@@ -181,6 +184,18 @@ export const ROUTES = [
       {
         path: "orders",
         element: <ProtectedRoute admin= {true}><ListOrders/></ProtectedRoute>,
+      },
+      {
+        path: "users",
+        element: <ProtectedRoute admin= {true}><ListUsers/></ProtectedRoute>,
+      },
+      {
+        path: "reviews",
+        element: <ProtectedRoute admin= {true}><ProductReviews/></ProtectedRoute>,
+      },
+      {
+        path: "users/:id",
+        element: <ProtectedRoute admin= {true}><UpdateUser/></ProtectedRoute>,
       },
       {
         path: "orders/:id",

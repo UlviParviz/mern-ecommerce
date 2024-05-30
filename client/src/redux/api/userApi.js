@@ -4,7 +4,7 @@ import { setIsAuthenticated, setLoading, setUser } from "../features/userSlice";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/v1" }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Admin Users", "AdminUser"],
   endpoints: (builder) => ({
     getMe: builder.query({
       query: () => "/me",
@@ -17,8 +17,6 @@ export const userApi = createApi({
           dispatch(setLoading(false));
         } catch (error) {
           dispatch(setLoading(false));
-
-          console.log(error);
         }
       },
       providesTags: ["User"],
@@ -71,6 +69,33 @@ export const userApi = createApi({
         };
       },
     }),
+    getAdminUsers: builder.query({
+      query: () => `/admin/users`,
+      providesTags: ["Admin Users"],
+    }),
+    getUserDetails: builder.query({
+      query: (id) => `/admin/users/${id}`,
+      providesTags: ["AdminUser"],
+    }),
+    updateUser: builder.mutation({
+      query({id, body}) {
+        return {
+          url: `/admin/users/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Admin Users", "AdminUser"]
+    }),
+    deleteUser: builder.mutation({
+      query(id) {
+        return {
+          url: `/admin/users/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Admin Users"]
+    }),
   }),
 });
 
@@ -80,5 +105,9 @@ export const {
   useUploadAvatarMutation,
   useUpdatePasswordMutation,
   useForgotPasswordMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
+  useGetAdminUsersQuery,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
+  useDeleteUserMutation
 } = userApi;

@@ -181,7 +181,7 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 // Get product reviews   =>  /api/v1/reviews
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.query.id).populate("reviews.user");
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -223,6 +223,7 @@ export const deleteReview = catchAsyncErrors(async (req, res, next) => {
     product,
   });
 });
+
 
 // Can user review   =>  /api/v1/can_review
 export const canUserReview = catchAsyncErrors(async (req, res) => {
