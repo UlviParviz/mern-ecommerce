@@ -8,8 +8,7 @@
     "start": "node server/app.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon server/app.js",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon server/app.js",
-    "seeder": "node server/seeder/seeder.js",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "seeder": "node server/seeder/seeder.js"
   },
   "author": "Ulvi Parviz",
   "license": "ISC",
