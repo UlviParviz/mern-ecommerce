@@ -2,7 +2,7 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Order from "../models/order.model.js";
 
 import Stripe from "stripe";
-const stripe = Stripe('sk_test_51PJAlQ02SPpvtPcn59RVXlyamAjGVeECMpVtKm2Njvh2cXCcKYj5ZAvOHNDn3ST3ekaxYc1Cw8TUig1VGgdJDj3t00IhKvUT6T');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create stripe checkout session   =>  /api/v1/payment/checkout_session
 export const stripeCheckoutSession = catchAsyncErrors(
@@ -20,7 +20,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
           },
           unit_amount: item?.price * 100,
         },
-        tax_rates: ["txr_1PJApY02SPpvtPcncLT4DkJr"],
+        tax_rates: ["txr_1LlBSDA7jBHqn8SB8z4waAin"],
         quantity: item?.quantity,
       };
     });
@@ -29,8 +29,8 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     const shipping_rate =
       body?.itemsPrice >= 200
-        ? "shr_1PJAoe02SPpvtPcn8QgWevmB"
-        : "shr_1PJAp002SPpvtPcngwvkJGrg";
+        ? "shr_1LlBW5A7jBHqn8SBG2fsAWwT"
+        : "shr_1NQYwEA7jBHqn8SBs5alau8k";
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -82,12 +82,10 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
   try {
     const signature = req.headers["stripe-signature"];
 
-    const STRIPE_WEBHOOK_SECRET= 'whsec_0a0731e7d4c6698027f64f92db2f279b6abe44bb3761bf1bfad0eccb67108b35'
-
     const event = stripe.webhooks.constructEvent(
       req.rawBody,
       signature,
-      STRIPE_WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET
     );
 
     if (event.type === "checkout.session.completed") {
