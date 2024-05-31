@@ -1,4 +1,4 @@
-# Auditore E-commerce Shop
+# Auditore
 
 Auditore is a full-featured e-commerce web application developed using modern technologies. The backend is built with Node.js, while the frontend utilizes React, Bootstrap, Tailwind CSS, Material UI, Flowbite, and React Icons. This application provides a robust platform for users and administrators with features such as authentication, order management, payment processing, and more.
 
