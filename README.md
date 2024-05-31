@@ -55,9 +55,10 @@ Make sure you have the following installed on your local machine:
 2. Start the backend in development mode:
    ```sh
    npm run dev
-Or start the backend in production mode:
+3. Or start the backend in production mode:
    ```sh
    npm run prod
+
 
 ### Running the Frontend
 
@@ -74,9 +75,3 @@ Or start the backend in production mode:
 ### Live Demo
 
 [Auditore Ecommerce Live Demo](https://auditore-ecommerce.onrender.com/)
-
-
-
-
-
-      
