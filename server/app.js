@@ -35,7 +35,11 @@ app.use(cors());
 app.use(bodyParser.raw({type: "*/*"}))
 app.use(bodyParser.json())
 
-dotenv.config({ path: "server/config/config.env" });
+
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "server/config/config.env" });
+  
+}
 
 connectDatabase();
 
