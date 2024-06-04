@@ -15,7 +15,7 @@ const Filters = () => {
   useEffect(() => {
     searchParams.has("min") && setMin(searchParams.get("min"));
     searchParams.has("max") && setMax(searchParams.get("max"));
-  });
+  }, [searchParams]);
 
   const handleClick = (checkbox) => {
     const checkboxes = document.getElementsByName(checkbox.name);
